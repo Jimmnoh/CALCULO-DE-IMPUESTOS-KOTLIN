@@ -1,0 +1,37 @@
+import kotlin.math.floor
+
+fun main() {
+    // Variables
+    var T: Double
+    var G: Double
+    var C = 0.0
+    var I = 0.0
+    val ITF = 0.00005 // 0.005% expresado como decimal
+
+    print("Ingrese el Monto Total (T): ")
+    T = readLine()?.toDoubleOrNull() ?: 0.0
+
+    if (T <= 0) {
+        println("El monto total debe ser mayor que 0.")
+        return
+    }
+
+    if (T <= 1000) {
+        C = 5.0 // Comisión fija
+    } else if (T > 1000 && T <= 10001) {
+        C = T-(T / 1.005) // 0.5% de comisión
+    } else {
+        C = T-(T / 1.015) // 1.5% de comisión
+    }
+
+    I = T-(T / 1.00005)
+
+    G = T - (C + I)
+
+    G = floor(G) // Redondear a un piso
+
+    // Mostrar los resultados
+    println("El Monto de Giro (G) es: $G")
+    println("La Comisión (C) es: $C")
+    println("El Impuesto (I) es: $I")
+}
